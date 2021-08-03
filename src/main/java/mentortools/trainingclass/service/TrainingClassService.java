@@ -1,15 +1,16 @@
 package mentortools.trainingclass.service;
 
-import mentortools.trainingclass.dto.CreateTrainingClassCommand;
-import mentortools.trainingclass.dto.TrainingClassDto;
-import mentortools.trainingclass.dto.UpdateTrainingClassCommand;
+import mentortools.EntityNotFoundException;
+import mentortools.trainingclass.model.dto.CreateTrainingClassCommand;
+import mentortools.trainingclass.model.dto.TrainingClassDto;
+import mentortools.trainingclass.model.dto.UpdateTrainingClassCommand;
 import mentortools.trainingclass.model.TrainingClass;
 import mentortools.trainingclass.repository.TrainingClassRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,8 @@ public class TrainingClassService {
 
     private TrainingClass getTrainingClassById(long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Training class not found, id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(URI.create("trainingclasses/trainingclass-not-found"),
+                        "Training class not found",
+                        "Training class not found with id: " + id));
     }
 }

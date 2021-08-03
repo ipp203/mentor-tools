@@ -1,9 +1,9 @@
 package mentortools.trainingclass.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import mentortools.trainingclass.dto.CreateTrainingClassCommand;
-import mentortools.trainingclass.dto.TrainingClassDto;
-import mentortools.trainingclass.dto.UpdateTrainingClassCommand;
+import mentortools.trainingclass.model.dto.CreateTrainingClassCommand;
+import mentortools.trainingclass.model.dto.TrainingClassDto;
+import mentortools.trainingclass.model.dto.UpdateTrainingClassCommand;
 import mentortools.trainingclass.service.TrainingClassService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/trainingclass")
+@RequestMapping("/api/trainingclasses")
 public class TrainingClassController {
 
     private final TrainingClassService service;

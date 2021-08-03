@@ -1,4 +1,4 @@
-package mentortools.trainingclass.dto;
+package mentortools.trainingclass.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "training_classes")
 public class TrainingClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

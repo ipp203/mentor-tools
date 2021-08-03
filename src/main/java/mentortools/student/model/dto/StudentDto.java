@@ -1,17 +1,20 @@
-package mentortools.trainingclass.dto;
+package mentortools.student.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mentortools.trainingclass.model.TrainingClassDates;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrainingClassDto {
+public class StudentDto {
     private long id;
 
     private String name;
 
-    private TrainingClassDates dates;
+    private String email;
+
+    private String gitHubUserName;
+
+    private String comment;
 }
