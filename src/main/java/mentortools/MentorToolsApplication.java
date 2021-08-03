@@ -5,7 +5,6 @@ import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.io.BufferedReader;
@@ -27,7 +26,7 @@ public class MentorToolsApplication {
     }
 
     @Bean
-    public OpenAPI openAPI(ApplicationContext context) {
+    public OpenAPI openAPI() {
 
         return new OpenAPI().info(new Info()
                 .title("Mentor Tools")
@@ -37,8 +36,7 @@ public class MentorToolsApplication {
     }
 
     private String readGitPropertiesVersion() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("git.properties");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("git.properties");
         try {
             return readFromInputStream(inputStream);
         } catch (IOException e) {

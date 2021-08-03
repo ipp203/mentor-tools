@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class CreateTrainingClassCommand {
 
     @NotBlank
-    @ValidStringLength(length = 255)
+    @ValidStringLength()
     @Schema(example = "Strukturavaltok")
     private String name;
 

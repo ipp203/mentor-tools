@@ -26,20 +26,20 @@ public class TrainingClassService {
 
     public List<TrainingClassDto> listClasses() {
         return repository.findAll().stream()
-                .map(c->modelMapper.map(c,TrainingClassDto.class))
+                .map(c -> modelMapper.map(c, TrainingClassDto.class))
                 .collect(Collectors.toList());
     }
 
     public TrainingClassDto getClassById(long id) {
         TrainingClass trainingClass = getTrainingClassById(id);
-        return modelMapper.map(trainingClass,TrainingClassDto.class);
+        return modelMapper.map(trainingClass, TrainingClassDto.class);
     }
 
     @Transactional
     public TrainingClassDto saveClass(CreateTrainingClassCommand command) {
-        TrainingClass trainingClass = new TrainingClass(command.getName(),command.getStartDate());
+        TrainingClass trainingClass = new TrainingClass(command.getName(), command.getStartDate());
         repository.save(trainingClass);
-        return modelMapper.map(trainingClass,TrainingClassDto.class);
+        return modelMapper.map(trainingClass, TrainingClassDto.class);
     }
 
     @Transactional
@@ -49,7 +49,7 @@ public class TrainingClassService {
         trainingClass.setName(command.getName());
         trainingClass.setDates(command.getDates());
 
-        return modelMapper.map(trainingClass,TrainingClassDto.class);
+        return modelMapper.map(trainingClass, TrainingClassDto.class);
     }
 
     @Transactional
@@ -57,8 +57,8 @@ public class TrainingClassService {
         repository.delete(getTrainingClassById(id));
     }
 
-    private TrainingClass getTrainingClassById(long id){
+    private TrainingClass getTrainingClassById(long id) {
         return repository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Training class not found, id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Training class not found, id: " + id));
     }
 }

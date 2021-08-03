@@ -13,7 +13,7 @@ import mentortools.validator.ValidStringLength;
 @AllArgsConstructor
 public class UpdateTrainingClassCommand {
 
-    @ValidStringLength(length = 255)
+    @ValidStringLength()
     @Schema(example = "Strukturavalto 2.")
     private String name;
 

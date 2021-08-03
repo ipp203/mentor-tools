@@ -23,33 +23,33 @@ public class TrainingClassController {
 
     @GetMapping
     @Operation(summary = "List classes.")
-    public List<TrainingClassDto> listClasses(){
+    public List<TrainingClassDto> listClasses() {
         return service.listClasses();
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get class by id.")
-    public TrainingClassDto getClass(@PathVariable("id") long id){
+    public TrainingClassDto getClass(@PathVariable("id") long id) {
         return service.getClassById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create class")
-    public TrainingClassDto createClass(@Valid @RequestBody CreateTrainingClassCommand command){
+    public TrainingClassDto createClass(@Valid @RequestBody CreateTrainingClassCommand command) {
         return service.saveClass(command);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update class's data")
-    public TrainingClassDto updateClass(@PathVariable("id") long id, @Valid @RequestBody UpdateTrainingClassCommand command){
+    public TrainingClassDto updateClass(@PathVariable("id") long id, @Valid @RequestBody UpdateTrainingClassCommand command) {
         return service.updateClass(id, command);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete class by id")
-    public void deleteClass(@PathVariable("id") long id){
+    public void deleteClass(@PathVariable("id") long id) {
         service.deleteClass(id);
     }
 
