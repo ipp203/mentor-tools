@@ -2,9 +2,10 @@ package mentortools.registration.service;
 
 import mentortools.EntityNotFoundException;
 import mentortools.registration.model.Registration;
-import mentortools.registration.model.Status;
+import mentortools.registration.model.RegistrationStatus;
 import mentortools.registration.model.dto.CreateRegistrationCommand;
 import mentortools.registration.model.dto.RegisteredStudentDto;
+import mentortools.registration.model.dto.TrainingClassNameDto;
 import mentortools.registration.model.dto.UpdateRegistrationCommand;
 import mentortools.registration.repository.RegistrationRepository;
 import mentortools.student.model.Student;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.util.List;
 
 
 @Service
@@ -36,8 +38,8 @@ public class RegistrationService {
 
         TrainingClass trainingClass = findTrainingClassById(trainingId);
 
-        Registration registration = registrationRepository.save(new Registration(student, trainingClass, Status.ACTIVE));
-        return new RegisteredStudentDto(student.getId(), student.getName(), registration.getStatus());
+        Registration registration = registrationRepository.save(new Registration(student, trainingClass, RegistrationStatus.ACTIVE));
+        return new RegisteredStudentDto(student.getId(), student.getName(), registration.getRegistrationStatus());
     }
 
     @Transactional
@@ -46,9 +48,19 @@ public class RegistrationService {
         TrainingClass trainingClass = findTrainingClassById(trainingId);
 
         Registration registration = findRegistrationByStudentIdAndTrainingId(student.getId(), trainingClass.getId());
-        registration.setStatus(command.getStatus());
+        registration.setRegistrationStatus(command.getStatus());
 
-        return new RegisteredStudentDto(student.getId(), student.getName(), registration.getStatus());
+        return new RegisteredStudentDto(student.getId(), student.getName(), registration.getRegistrationStatus());
+    }
+
+    public List<RegisteredStudentDto> listRegisteredStudents(long trainingId) {
+        findTrainingClassById(trainingId);
+        return registrationRepository.findRegisteredStudentsByTrainingId(trainingId);
+    }
+
+    public List<TrainingClassNameDto> listTrainingClassesByStudentId(long studentId) {
+        findStudentById(studentId);
+        return registrationRepository.findTrainingClassesByStudentId(studentId);
     }
 
     private Student findStudentById(long id){

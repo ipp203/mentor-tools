@@ -3,7 +3,7 @@ package mentortools.registration.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mentortools.registration.model.Status;
+import mentortools.registration.model.RegistrationStatus;
 
 @Data
 @AllArgsConstructor
@@ -11,5 +11,5 @@ import mentortools.registration.model.Status;
 public class RegisteredStudentDto {
     private long studentId;
     private String name;
-    private Status status;
+    private RegistrationStatus status;
 }

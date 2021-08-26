@@ -7,12 +7,12 @@ import mentortools.student.model.Student;
 import mentortools.trainingclass.model.TrainingClass;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "registrations")
 public class Registration {
 
     @Id
@@ -26,11 +26,11 @@ public class Registration {
     private TrainingClass trainingClass;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private RegistrationStatus registrationStatus;
 
-    public Registration(Student student, TrainingClass trainingClass, Status status) {
+    public Registration(Student student, TrainingClass trainingClass, RegistrationStatus registrationStatus) {
         this.student = student;
         this.trainingClass = trainingClass;
-        this.status = status;
+        this.registrationStatus = registrationStatus;
     }
 }

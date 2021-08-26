@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = "/delete_tables.sql")
-class StudentControllerTest {
+class StudentControllerIT {
     private static final String BASE_URL = "/api/students";
 
     @Autowired

@@ -10,6 +10,6 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateRegistrationCommand {
-    @Positive
+    @Positive(message = "Id must be positive!")
     private long studentId;
 }
