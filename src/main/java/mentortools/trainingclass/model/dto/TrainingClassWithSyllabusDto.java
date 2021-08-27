@@ -9,10 +9,12 @@ import mentortools.trainingclass.model.TrainingClassDates;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrainingClassDto {
+public class TrainingClassWithSyllabusDto {
     private long id;
 
     private String name;
 
     private TrainingClassDates dates;
+
+    private SyllabusDto syllabus;
 }

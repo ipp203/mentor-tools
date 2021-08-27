@@ -3,6 +3,7 @@ package mentortools.trainingclass.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mentortools.syllabus.model.Syllabus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,6 +22,9 @@ public class TrainingClass {
     private String name;
 
     private TrainingClassDates dates;
+
+    @ManyToOne
+    private Syllabus syllabus;
 
     public TrainingClass(String name, LocalDate startDate) {
         this.name = name;
