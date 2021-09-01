@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import mentortools.module.model.Module;
 import mentortools.trainingclass.model.TrainingClass;
 
 import javax.persistence.*;
@@ -26,6 +27,9 @@ public class Syllabus {
     @EqualsAndHashCode.Exclude
     private Set<TrainingClass> trainingClasses;
 
+    @OneToMany
+    private Set<Module> modules;
+
     public Syllabus(String name) {
         this.name = name;
     }
@@ -40,5 +44,12 @@ public class Syllabus {
 
     public void deleteFromTrainingClasses() {
         trainingClasses.forEach(tc->tc.setSyllabus(null));
+    }
+
+    public void addModule(Module module){
+        if(modules == null){
+            modules = new HashSet<>();
+        }
+        modules.add(module);
     }
 }

@@ -1,6 +1,5 @@
 package mentortools.syllabus.service;
 
-import mentortools.EntityNotFoundException;
 import mentortools.syllabus.model.Syllabus;
 import mentortools.syllabus.model.dto.AssignSyllabusToTrainingClassCommand;
 import mentortools.syllabus.model.dto.CreateSyllabusCommand;
@@ -11,11 +10,11 @@ import mentortools.trainingclass.model.dto.TrainingClassWithSyllabusDto;
 import mentortools.trainingclass.repository.TrainingClassRepositoryOperation;
 import mentortools.syllabus.TrainingClassAlreadyHasSyllabusException;
 import mentortools.syllabus.TrainingClassHasNoSyllabusException;
+import mentortools.syllabus.repository.SyllabusRepositoryOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,11 +23,13 @@ public class SyllabusService {
 
     private final SyllabusRepository syllabusRepository;
     private final TrainingClassRepositoryOperation trainingClassRepositoryOperation;
+    private final SyllabusRepositoryOperation syllabusRepositoryOperation;
     private final ModelMapper modelMapper;
 
-    public SyllabusService(SyllabusRepository syllabusRepository, TrainingClassRepositoryOperation trainingClassRepositoryOperation, ModelMapper modelMapper) {
+    public SyllabusService(SyllabusRepository syllabusRepository, TrainingClassRepositoryOperation trainingClassRepositoryOperation, SyllabusRepositoryOperation syllabusRepositoryOperation, ModelMapper modelMapper) {
         this.syllabusRepository = syllabusRepository;
         this.trainingClassRepositoryOperation = trainingClassRepositoryOperation;
+        this.syllabusRepositoryOperation = syllabusRepositoryOperation;
         this.modelMapper = modelMapper;
     }
 
@@ -39,7 +40,7 @@ public class SyllabusService {
     }
 
     public SyllabusDto getSyllabusById(long id) {
-        return modelMapper.map(findById(id), SyllabusDto.class);
+        return modelMapper.map(syllabusRepositoryOperation.findSyllabusById(id), SyllabusDto.class);
     }
 
     @Transactional
@@ -50,7 +51,7 @@ public class SyllabusService {
 
     @Transactional
     public void deleteSyllabus(long id) {
-        Syllabus syllabus = findById(id);
+        Syllabus syllabus = syllabusRepositoryOperation.findSyllabusById(id);
         syllabus.deleteFromTrainingClasses();
         syllabusRepository.delete(syllabus);
     }
@@ -61,7 +62,7 @@ public class SyllabusService {
         if (trainingClass.getSyllabus() != null) {
             throw new TrainingClassAlreadyHasSyllabusException(trainingClass);
         }
-        Syllabus syllabus = findById(command.getSyllabusId());
+        Syllabus syllabus = syllabusRepositoryOperation.findSyllabusById(command.getSyllabusId());
         syllabus.addTrainingClass(trainingClass);
         return modelMapper.map(trainingClass, TrainingClassWithSyllabusDto.class);
     }
@@ -72,18 +73,12 @@ public class SyllabusService {
         if (trainingClass.getSyllabus() == null) {
             throw new TrainingClassHasNoSyllabusException(trainingClass);
         }
-        Syllabus syllabus = findById(command.getSyllabusId());
+        Syllabus syllabus = syllabusRepositoryOperation.findSyllabusById(command.getSyllabusId());
         syllabus.addTrainingClass(trainingClass);
         return modelMapper.map(trainingClass, TrainingClassWithSyllabusDto.class);
     }
 
-    private Syllabus findById(long id) {
-        return syllabusRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        URI.create("syllabuses/syllabus-not-found"),
-                        "Syllabus not found",
-                        String.format("Syllabus with id %s not found", id)));
-    }
+
 
     public TrainingClassWithSyllabusDto getTrainigClassWithSyllabus(long id) {
         TrainingClass trainingClass = trainingClassRepositoryOperation.getTrainingClassById(id);
