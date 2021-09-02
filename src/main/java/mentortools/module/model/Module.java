@@ -23,15 +23,15 @@ public class Module {
 
     private String title;
 
-    private String URL;
+    private String url;
 
     @EqualsAndHashCode.Exclude
     @ManyToMany
     private Set<Lesson> lessons;
 
-    public Module(String title, String URL) {
+    public Module(String title, String url) {
         this.title = title;
-        this.URL = URL;
+        this.url = url;
     }
 
     public void addLesson(Lesson lesson){

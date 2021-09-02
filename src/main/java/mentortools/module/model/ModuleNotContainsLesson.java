@@ -11,6 +11,7 @@ import java.net.URI;
 
 @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
 public class ModuleNotContainsLesson extends AbstractThrowableProblem {
+
     public ModuleNotContainsLesson(Module module, Lesson lesson){
         super(URI.create("modules/not-contains-lesson"),
                 "Module does not contain lesson",
@@ -19,4 +20,5 @@ public class ModuleNotContainsLesson extends AbstractThrowableProblem {
                         module.getId(), module.getTitle(),
                         lesson.getId(), lesson.getTitle()));
     }
+
 }

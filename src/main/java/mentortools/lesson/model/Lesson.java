@@ -23,14 +23,14 @@ public class Lesson {
 
     private String title;
 
-    private String URL;
+    private String url;
 
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "lessons")
     private Set<Module> modules;
 
-    public Lesson(String title, String URL) {
+    public Lesson(String title, String url) {
         this.title = title;
-        this.URL = URL;
+        this.url = url;
     }
 }

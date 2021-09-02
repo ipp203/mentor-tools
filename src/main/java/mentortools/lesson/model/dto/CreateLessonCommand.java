@@ -17,5 +17,5 @@ public class CreateLessonCommand {
     private String title;
     @NotBlank
     @ValidStringLength
-    private String URL;
+    private String url;
 }

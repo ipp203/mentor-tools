@@ -45,14 +45,14 @@ public class ModuleService {
 
     public ModuleDto saveModule(CreateModuleCommand command) {
         return modelMapper.map(
-                moduleRepository.save(new Module(command.getTitle(), command.getURL())), ModuleDto.class);
+                moduleRepository.save(new Module(command.getTitle(), command.getUrl())), ModuleDto.class);
     }
 
     @Transactional
     public ModuleDto changeModule(long id, CreateModuleCommand command) {
         Module module = moduleRepositoryOperation.findById(id);
         module.setTitle(command.getTitle());
-        module.setURL(command.getURL());
+        module.setUrl(command.getUrl());
         return modelMapper.map(module, ModuleDto.class);
     }
 

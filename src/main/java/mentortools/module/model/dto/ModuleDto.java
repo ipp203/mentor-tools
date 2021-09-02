@@ -13,5 +13,5 @@ public class ModuleDto {
 
     private String title;
 
-    private String URL;
+    private String url;
 }

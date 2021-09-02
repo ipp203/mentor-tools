@@ -18,5 +18,5 @@ public class CreateModuleCommand {
 
     @NotBlank
     @ValidStringLength
-    private String URL;
+    private String url;
 }

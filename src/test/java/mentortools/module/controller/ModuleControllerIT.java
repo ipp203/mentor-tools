@@ -97,7 +97,7 @@ class ModuleControllerIT {
     @Test
     void createModule() {
         ModuleDto result = template.postForObject("/api/modules",
-                new CreateModuleCommand(module1.getTitle(), module1.getURL()),
+                new CreateModuleCommand(module1.getTitle(), module1.getUrl()),
                 ModuleDto.class);
 
         assertNotNull(result);

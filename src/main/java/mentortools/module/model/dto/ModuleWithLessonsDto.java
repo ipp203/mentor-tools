@@ -16,7 +16,7 @@ public class ModuleWithLessonsDto {
 
     private String title;
 
-    private String URL;
+    private String url;
 
     private Set<LessonDto> lessons;
 }

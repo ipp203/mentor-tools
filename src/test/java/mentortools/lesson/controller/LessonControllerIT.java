@@ -6,14 +6,8 @@ import mentortools.lesson.model.dto.CreateLessonCommand;
 import mentortools.lesson.model.dto.LessonDto;
 import mentortools.lesson.repository.LessonRepository;
 import mentortools.module.model.Module;
-import mentortools.module.model.dto.AddModuleCommand;
-import mentortools.module.model.dto.CreateModuleCommand;
-import mentortools.module.model.dto.ModuleDto;
 import mentortools.module.model.dto.ModuleWithLessonsDto;
 import mentortools.module.repository.ModuleRepository;
-import mentortools.syllabus.model.Syllabus;
-import mentortools.syllabus.model.dto.SyllabusWithModulesDto;
-import mentortools.syllabus.repository.SyllabusRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -102,7 +96,7 @@ class LessonControllerIT {
     @Test
     void createLesson() {
         LessonDto result = template.postForObject("/api/lessons",
-                new CreateLessonCommand(lesson1.getTitle(), lesson1.getURL()),
+                new CreateLessonCommand(lesson1.getTitle(), lesson1.getUrl()),
                 LessonDto.class);
 
         assertNotNull(result);

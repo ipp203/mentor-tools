@@ -41,14 +41,14 @@ public class LessonService {
     }
 
     public LessonDto saveLesson(CreateLessonCommand command) {
-        Lesson lesson = lessonRepository.save(new Lesson(command.getTitle(), command.getURL()));
+        Lesson lesson = lessonRepository.save(new Lesson(command.getTitle(), command.getUrl()));
         return modelMapper.map(lesson, LessonDto.class);
     }
 
     public LessonDto changeLesson(long id, CreateLessonCommand command) {
        Lesson lesson = findById(id);
        lesson.setTitle(command.getTitle());
-       lesson.setURL(command.getURL());
+       lesson.setUrl(command.getUrl());
        return modelMapper.map(lesson, LessonDto.class);
     }
 
