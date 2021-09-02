@@ -223,7 +223,7 @@ class ModuleControllerIT {
     }
 
     @Test
-    void removeNotConatianedModuleFromSyllabus() {
+    void removeNotContainedModuleFromSyllabus() {
         moduleRepository.save(module1);
         moduleRepository.save(module2);
         syllabus.addModule(module1);
