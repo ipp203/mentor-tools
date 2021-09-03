@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,8 +27,9 @@ public class StudentService {
         this.studentRepositoryOperation = studentRepositoryOperation;
     }
 
-    public List<StudentDto> listStudents() {
+    public List<StudentDto> listStudents(Optional<String> name) {
         return repository.findAll().stream()
+                .filter(s->name.isEmpty() || s.getName().toLowerCase().contains(name.get().toLowerCase()))
                 .map(c -> modelMapper.map(c, StudentDto.class))
                 .collect(Collectors.toList());
     }

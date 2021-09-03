@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/students")
@@ -23,8 +24,8 @@ public class StudentController {
 
     @GetMapping
     @Operation(summary = "List students.")
-    public List<StudentDto> listStudents() {
-        return service.listStudents();
+    public List<StudentDto> listStudents(@RequestParam Optional<String> name) {
+        return service.listStudents(name);
     }
 
     @GetMapping("/{id}")
