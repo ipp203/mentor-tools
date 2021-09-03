@@ -1,5 +1,6 @@
 package mentortools.lessoncompletion.model.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,11 @@ import java.time.LocalDateTime;
 public class CreateLessonCompletionCommand {
 
     @NotNull
+    @Schema(example = "COMPLETED")
     private PerformStatus videoStatus;
 
     @NotNull
+    @Schema(example = "COMPLETED")
     private PerformStatus taskStatus;
 
     @NotNull
@@ -28,11 +31,10 @@ public class CreateLessonCompletionCommand {
     private LocalDateTime timeOfTaskCompleted;
 
     @ValidStringLength
+    @Schema(example = "github.com/abcd/123456789")
     private String commitUrl;
 
     @Positive
     private long lessonId;
 
-    @Positive
-    private long studentId;
 }

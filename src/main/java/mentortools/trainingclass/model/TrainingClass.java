@@ -18,7 +18,7 @@ public class TrainingClass {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 355)
+    @Column(length = 255)
     private String name;
 
     private TrainingClassDates dates;

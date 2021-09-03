@@ -1,5 +1,6 @@
 package mentortools.registration.model.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,6 @@ public class UpdateRegistrationCommand {
     private long studentId;
 
     @NotNull
+    @Schema(example = "ACTIVE")
     private RegistrationStatus status;
 }

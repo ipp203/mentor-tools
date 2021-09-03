@@ -1,6 +1,7 @@
 package mentortools.trainingclass.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import mentortools.trainingclass.model.dto.CreateTrainingClassCommand;
 import mentortools.trainingclass.model.dto.TrainingClassDto;
 import mentortools.trainingclass.model.dto.UpdateTrainingClassCommand;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/trainingclasses")
+@Tag(name = "Training class administration")
 public class TrainingClassController {
 
     private final TrainingClassService service;

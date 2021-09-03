@@ -1,5 +1,6 @@
 package mentortools.syllabus.model.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,6 @@ import javax.validation.constraints.NotBlank;
 public class CreateSyllabusCommand {
     @NotBlank
     @ValidStringLength
+    @Schema(example = "JPA")
     private String name;
 }

@@ -1,6 +1,7 @@
 package mentortools.student.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import mentortools.student.model.dto.CreateStudentCommand;
 import mentortools.student.model.dto.StudentDto;
 import mentortools.student.model.dto.UpdateStudentCommand;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/students")
+@Tag(name = "Student administration")
 public class StudentController {
 
     private final StudentService service;
@@ -23,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping
-    @Operation(summary = "List students.")
+    @Operation(summary = "List students and filter by name")
     public List<StudentDto> listStudents(@RequestParam Optional<String> name) {
         return service.listStudents(name);
     }
