@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import mentortools.lesson.model.dto.LessonDto;
 import mentortools.lessoncompletion.model.TaskCompletion;
 import mentortools.lessoncompletion.model.VideoCompletion;
+import mentortools.student.model.dto.StudentDto;
 
 @Data
 @NoArgsConstructor
@@ -18,4 +19,6 @@ public class LessonCompletionDto {
     private TaskCompletion taskCompletion;
 
     private LessonDto lesson;
+
+    private StudentDto student;
 }
