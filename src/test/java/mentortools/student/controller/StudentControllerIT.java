@@ -38,7 +38,7 @@ class StudentControllerIT {
     StudentRepository repository;
 
     @Test
-    void createClass() {
+    void createStudent() {
         TrainingClassDto student = template.postForObject(BASE_URL,
                 new CreateStudentCommand("Isoczki Pal", "abcd@abcd.hu", null, ""),
                 TrainingClassDto.class);
@@ -51,7 +51,7 @@ class StudentControllerIT {
     }
 
     @Test
-    void listClasses() {
+    void listStudents() {
         repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
         repository.save(new Student("Isoczki Peter", "dcba@dcba.hu", "peter", "Legokosabb tanulo"));
 
@@ -61,12 +61,25 @@ class StudentControllerIT {
                 new ParameterizedTypeReference<List<StudentDto>>() {
                 }).getBody();
 
+        assertThat(result)
+                .hasSize(2)
+                .extracting(StudentDto::getName)
+                .contains("Isoczki Pal", "Isoczki Peter");
 
-        assertThat(result).hasSize(2).extracting(StudentDto::getName).contains("Isoczki Pal", "Isoczki Peter");
+        List<StudentDto> filteredResult = template.exchange(BASE_URL+"?name=peter",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<StudentDto>>() {
+                }).getBody();
+
+        assertThat(filteredResult)
+                .hasSize(1)
+                .extracting(StudentDto::getName)
+                .contains("Isoczki Peter");
     }
 
     @Test
-    void testGetClass() {
+    void testGetStudent() {
         Student student = repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
 
         StudentDto result = template.getForObject(BASE_URL + "/" + student.getId(), StudentDto.class);
@@ -75,7 +88,7 @@ class StudentControllerIT {
     }
 
     @Test
-    void testGetClassWithWrongId() {
+    void testGetStudentWithWrongId() {
         Student student = repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
 
         Problem problem = template.exchange(BASE_URL + "/" + (1000 * student.getId()),
@@ -88,7 +101,7 @@ class StudentControllerIT {
     }
 
     @Test
-    void updateClass() {
+    void updateStudent() {
         Student student = repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
 
         template.put(BASE_URL + "/" + student.getId(), new UpdateStudentCommand("Isoczki Peter",
@@ -104,7 +117,7 @@ class StudentControllerIT {
     }
 
     @Test
-    void updateClassWithWrongEmail() {
+    void updateStudentWithWrongEmail() {
         Student student = repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
 
         Problem problem = template.exchange(BASE_URL + "/" + student.getId(),
@@ -120,7 +133,7 @@ class StudentControllerIT {
     }
 
     @Test
-    void deleteClass() {
+    void deleteStudent() {
         Student student = repository.save(new Student("Isoczki Pal", "abcd@abcd.com", null, ""));
 
         template.delete(BASE_URL + "/" + student.getId());
